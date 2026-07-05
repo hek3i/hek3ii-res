@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home - hek3i</title>
+  <meta name="description" content="Editing resources and documentation for hek3i.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1117;
+      --panel: #171a22;
+      --panel-soft: #1d212c;
+      --line: #2a2f3a;
+      --text: #edf0f7;
+      --muted: #9aa3b5;
+      --brand: #8b8cff;
+      --brand-2: #40d7c8;
+      --accent: #ffbd66;
+      --danger: #ff7676;
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(64, 215, 200, .12), transparent 24rem),
+        radial-gradient(circle at 18% 20%, rgba(139, 140, 255, .14), transparent 22rem),
+        var(--bg);
+      color: var(--text);
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      height: 64px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(15, 17, 23, .88);
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar-inner {
+      max-width: 1180px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: max-content;
+      font-weight: 700;
+    }
+
+    .brand img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
+    }
+
+    .nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav a,
+    .discord {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav a.active,
+    .nav a:hover,
+    .discord:hover {
+      color: var(--text);
+      background: rgba(255,255,255,.07);
+    }
+
+    .search {
+      width: min(260px, 28vw);
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: 0 12px;
+      outline: 0;
+    }
+
+    .shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 56px 24px 72px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      align-items: center;
+      gap: 58px;
+      min-height: 430px;
+      padding: 24px 0 64px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(56px, 8vw, 86px);
+      line-height: .95;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, #ffffff 0%, var(--brand) 46%, var(--brand-2) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .tagline {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 24px;
+      line-height: 1.45;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .button.primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 16px 36px rgba(139, 140, 255, .25);
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-color: rgba(255,255,255,.08);
+    }
+
+    .hero-art {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 360px;
+    }
+
+    .hero-art::before {
+      content: "";
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(139,140,255,.35), rgba(64,215,200,.18));
+      filter: blur(44px);
+      opacity: .8;
+    }
+
+    .hero-art img {
+      position: relative;
+      width: min(320px, 80vw);
+      height: auto;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      display: block;
+      min-height: 136px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-3px);
+      border-color: rgba(139,140,255,.55);
+      background: linear-gradient(180deg, rgba(139,140,255,.12), rgba(255,255,255,.025));
+    }
+
+    .feature h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .docs-layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 92px;
+      max-height: calc(100vh - 112px);
+      overflow: auto;
+      padding-right: 6px;
+    }
+
+    .side-group {
+      margin-bottom: 24px;
+    }
+
+    .side-title {
+      margin: 0 0 8px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .side-link {
+      display: flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 10px;
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .side-link.active,
+    .side-link:hover {
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+    }
+
+    .doc {
+      max-width: 760px;
+      min-height: 520px;
+    }
+
+    .doc h1 {
+      margin-bottom: 16px;
+      font-size: clamp(36px, 5vw, 52px);
+      line-height: 1.08;
+    }
+
+    .doc .lead {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+      margin: 0 0 32px;
+    }
+
+    .doc h2 {
+      margin: 34px 0 10px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .doc p,
+    .doc li {
+      color: #c7cedd;
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .doc ul {
+      padding-left: 22px;
+    }
+
+    .notice {
+      margin: 24px 0;
+      padding: 16px 18px;
+      border: 1px solid rgba(255, 189, 102, .35);
+      border-radius: var(--radius);
+      background: rgba(255, 189, 102, .08);
+      color: #f5d2a1;
+      line-height: 1.65;
+    }
+
+    .empty-state {
+      border: 1px dashed rgba(255,255,255,.18);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+    }
+
+    .footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px 34px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .footer a {
+      color: var(--brand-2);
+      font-weight: 700;
+    }
+
+    .footer a:hover {
+      color: var(--text);
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 880px) {
+      .topbar { height: auto; }
+      .topbar-inner {
+        min-height: 64px;
+        flex-wrap: wrap;
+        padding: 12px 18px;
+      }
+      .nav {
+        width: 100%;
+        order: 3;
+        overflow-x: auto;
+        margin-left: 0;
+        padding-bottom: 2px;
+      }
+      .search {
+        flex: 1;
+        min-width: 150px;
+        width: auto;
+      }
+      .shell { padding: 34px 18px 58px; }
+      .footer { padding: 0 18px 30px; }
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        padding-bottom: 42px;
+      }
+      .hero-art {
+        min-height: 260px;
+        order: -1;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      .docs-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .sidebar {
+        position: static;
+        max-height: none;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .sidebar { grid-template-columns: 1fr; }
+      .actions { align-items: stretch; }
+      .button { width: 100%; }
+      h1 { font-size: 52px; }
+      .tagline { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#/">
+        <img src="hek3i-mark.png" alt="">
+        <span>hek3i</span>
+      </a>
+      <input id="search" class="search" type="search" placeholder="Search docs">
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#/" data-nav="/">Home</a>
+        <a href="#/faq" data-nav="/faq">FAQ</a>
+        <a href="#/windows" data-nav="/windows">Windows</a>
+        <a href="#/mac" data-nav="/mac">MacOS</a>
+        <a href="#/beginnersguide" data-nav="/beginnersguide">Guide</a>
+        <a class="discord" href="#/community" data-nav="/community">Community</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section id="home">
+      <div class="hero">
+        <div>
+          <h1><span class="gradient-text">hek3i</span></h1>
+          <p class="tagline">Editing resources, setup notes, and documentation for motion editors.</p>
+          <div class="actions">
+            <a class="button primary" href="#/faq">Frequently Asked Questions</a>
+            <a class="button secondary" href="#/community">Community</a>
+            <a class="button secondary" href="#/safety">Safety Inquiries</a>
+            <a class="button secondary" href="#/changelog">Latest Updates</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <img src="hek3i-mark.png" alt="">
+        </div>
+      </div>
+
+      <div class="feature-grid" id="features"></div>
+    </section>
+
+    <section id="docs" class="docs-layout hidden">
+      <aside class="sidebar" id="sidebar" aria-label="Documentation sidebar"></aside>
+      <article class="doc" id="doc"></article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    made by hek3i · <a href="https://me.hek3i.cc" target="_blank" rel="noopener">Portfolio</a>
+  </footer>
+
+  <script>
+    const groups = [
+      {
+        title: "Downloads",
+        items: [
+          ["/windows", "Windows", "Software and plugins."],
+          ["/mac", "MacOS", "Software and plugins."],
+          ["/extensions", "Extensions & Scripts", "Extensions and scripts."],
+          ["/archived", "Archived", "Discontinued or superseded resources."]
+        ]
+      },
+      {
+        title: "FAQ",
+        items: [["/faq", "Frequently Asked Questions", "Answers before you install or troubleshoot."]]
+      },
+      {
+        title: "Guides",
+        items: [
+          ["/genuine-service", "Adobe Genuine Service Help", "Lawful troubleshooting for license warnings."],
+          ["/beginnersguide", "After Effects Beginners Guide", "Everything you need to know as a new editor."],
+          ["/mxn-troubleshoot", "Maxon Troubleshoot Guide", "Common render, plugin, and login fixes."],
+          ["/versionswapguide", "Changing Adobe Versions", "Planning upgrades and rollbacks."],
+          ["/ae-paths", "After Effects Installation Paths", "Where common folders live."],
+          ["/licensing", "Adobe Licensing", "Activation and account guidance."],
+          ["/rosetta", "Rosetta Guide (MacOS)", "Apple silicon compatibility notes."]
+        ]
+      },
+      {
+        title: "Other Links",
+        items: [
+          ["/websites", "Helpful Websites", "Footage, fonts, tools, and reference libraries."],
+          ["/footage", "AMV Footage", "Clean sourcing notes for clips and packs."],
+          ["/safety", "Safety Inquiries", "What to check before trusting a download."],
+          ["/changelog", "Latest Updates", "A living log for future edits."],
+          ["/community", "Community", "Where to send people next."]
+        ]
+      }
+    ];
+
+    const pages = {
+      "/faq": {
+        title: "Frequently Asked Questions",
+        lead: "Short answers for the questions an editing resource site usually gets first.",
+        sections: [
+          ["What is hek3i?", "hek3i is a documentation hub for motion editing resources, setup notes, and safer workflow references."],
+          ["Are downloads hosted here?", "This rebuild is prepared for resource links, but fields that depend on live files are intentionally left as documentation slots until you add verified sources."],
+          ["Can I request a page?", "Yes. The navigation is already organized so new pages can be dropped into Downloads, Guides, FAQ, or Other Links."]
+        ]
+      },
+      "/windows": {
+        title: "Windows",
+        lead: "A place for Windows setup notes, plugin compatibility, and trusted resource links.",
+        sections: [
+          ["Recommended fields", "Add app version, supported Windows versions, install notes, source link, checksum, and known issues."],
+          ["Before installing", "Create a restore point, download from official vendors where possible, scan files, and keep a note of plugin versions used in active projects."],
+          ["Resource slots", "Plugin managers, typography tools, footage utilities, codec tools, and editor helpers can be listed here after verification."]
+        ]
+      },
+      "/mac": {
+        title: "MacOS",
+        lead: "Compatibility notes for Intel and Apple silicon editing setups.",
+        sections: [
+          ["Recommended fields", "Track chip type, macOS version, app version, notarization status, and whether Rosetta is required."],
+          ["Before installing", "Prefer signed installers, check privacy permissions, and keep plugin builds matched to your host application."],
+          ["Resource slots", "Add verified links for color tools, extension managers, font utilities, and codecs."]
+        ]
+      },
+      "/extensions": {
+        title: "Extensions & Scripts",
+        lead: "A catalog page for scripts, panels, presets, and workflow helpers.",
+        sections: [
+          ["Listing format", "Use name, platform, host app, install folder, author, license, and last-tested date."],
+          ["Review checklist", "Read the source when available, avoid unknown installers, and document what permissions a panel requires."],
+          ["Status field", "Mark each item as verified, needs review, archived, or removed."]
+        ]
+      },
+      "/archived": {
+        title: "Archived",
+        lead: "A quiet place for dead links, discontinued files, and old instructions that should not be treated as current.",
+        sections: [
+          ["Purpose", "Keep historical context without making old downloads look recommended."],
+          ["Suggested columns", "Original title, last known URL, archive date, replacement link, and reason for retirement."],
+          ["Current status", "Generated from the recovered navigation map; content fields are ready for manual review."]
+        ]
+      },
+      "/beginnersguide": {
+        title: "After Effects Beginners Guide",
+        lead: "A starter path for new editors who need the basics before they collect plugins.",
+        sections: [
+          ["Start here", "Learn project organization, frame rates, composition settings, keyframes, graph editor basics, masks, precomps, and export settings."],
+          ["Practice loop", "Build one short edit, duplicate it, then improve timing, typography, color, and sound design one pass at a time."],
+          ["Avoid early clutter", "Install only the tools needed for the next project so troubleshooting stays manageable."]
+        ]
+      },
+      "/genuine-service": {
+        title: "Adobe Genuine Service Help",
+        lead: "Safe troubleshooting for warnings, licensing errors, and account mismatch problems.",
+        notice: "This page is intentionally written for lawful troubleshooting. It does not include bypasses, cracks, or instructions to disable licensing checks.",
+        sections: [
+          ["First checks", "Confirm your subscription status, sign out and back in, update Creative Cloud Desktop, and verify that the installed app matches the licensed account."],
+          ["Clean repair path", "Use Adobe's official cleanup and support tools when a legitimate installation is corrupted."],
+          ["Documentation fields", "Add official support links, error codes, screenshots, and steps that preserve licensing compliance."]
+        ]
+      },
+      "/mxn-troubleshoot": {
+        title: "Maxon Troubleshoot Guide",
+        lead: "A workspace for fixing plugin activation, missing effects, render failures, and version mismatches.",
+        sections: [
+          ["Check order", "Confirm host app version, Maxon app version, account status, plugin path, GPU driver, and whether the project was made with a newer plugin build."],
+          ["Common fixes", "Reinstall through the official manager, clear only documented caches, and test in a blank project before changing client files."],
+          ["Notes field", "Record exact versions so teams can reproduce the fix."]
+        ]
+      },
+      "/versionswapguide": {
+        title: "Changing Adobe Versions",
+        lead: "Upgrade and rollback planning for After Effects projects.",
+        sections: [
+          ["Before changing", "Back up projects, note plugin versions, export a reference render, and check whether collaborators need the same version."],
+          ["Rollback notes", "Keep older installers only through official account channels and avoid opening production files in newer versions unless you have a copy."],
+          ["Compatibility field", "Track which version each template, plugin, or preset was last tested with."]
+        ]
+      },
+      "/ae-paths": {
+        title: "After Effects Installation Paths",
+        lead: "Common places to document presets, scripts, plugins, templates, and cache folders.",
+        sections: [
+          ["Windows fields", "Record system plugin folders, user scripts, presets, media cache, and render output locations for your specific version."],
+          ["MacOS fields", "Record application support folders, user scripts, presets, plugins, and privacy permissions."],
+          ["Team note", "Paths change by app version and installation choice, so keep this page versioned."]
+        ]
+      },
+      "/licensing": {
+        title: "Adobe Licensing",
+        lead: "Account and activation guidance for legitimate installations.",
+        notice: "The recovered navigation referenced activation tools. In this hek3i rebuild, that area is replaced with compliant licensing documentation.",
+        sections: [
+          ["Account checks", "Confirm the correct Adobe ID, plan status, device limit, and Creative Cloud Desktop health."],
+          ["When activation fails", "Use official repair steps, contact support, or reinstall from Adobe's account portal."],
+          ["Fields to fill", "Official support URL, error code, affected version, date checked, and resolution."]
+        ]
+      },
+      "/rosetta": {
+        title: "Rosetta Guide (MacOS)",
+        lead: "Compatibility notes for running Intel-only tools on Apple silicon Macs.",
+        sections: [
+          ["When to use Rosetta", "Use it only when a plugin, codec, or extension has no native Apple silicon build and the vendor recommends Rosetta."],
+          ["Test method", "Open a duplicate project, render a short section, and compare plugin behavior before changing your main workflow."],
+          ["Fields to fill", "Tool name, native support status, tested host app version, and vendor note."]
+        ]
+      },
+      "/websites": {
+        title: "Helpful Websites",
+        lead: "A curated list area for editors: footage, fonts, design references, converters, and learning libraries.",
+        sections: [
+          ["Categories", "Footage, sound design, typography, color references, compression tools, stock-safe assets, and technical documentation."],
+          ["Quality bar", "Prefer sites with clear licensing, stable downloads, author attribution, and update history."],
+          ["Template row", "Name, URL, category, license, notes, and last checked."]
+        ]
+      },
+      "/footage": {
+        title: "AMV Footage",
+        lead: "A documentation page for sourcing clips and organizing edit-ready footage.",
+        sections: [
+          ["Sourcing note", "Only list sources that you have permission to use or that are appropriate for your project context."],
+          ["Organization", "Track show/movie title, resolution, frame rate, source quality, color space, and storage path."],
+          ["Field status", "This page is ready for your verified links and pack notes."]
+        ]
+      },
+      "/safety": {
+        title: "Safety Inquiries",
+        lead: "A simple checklist for deciding whether a download, script, or plugin should be trusted.",
+        sections: [
+          ["Check the source", "Use official vendors, known authors, signed releases, and links shared from original project pages."],
+          ["Check the file", "Scan downloads, compare checksums when available, and avoid installers that ask for unrelated permissions."],
+          ["Check the claim", "Be careful with tools promising free paid software, hidden unlocks, or system-level changes without clear documentation."]
+        ]
+      },
+      "/changelog": {
+        title: "Latest Updates",
+        lead: "A living update log for the hek3i docs.",
+        sections: [
+          ["2026-07-05", "Initial rebuild created from the recovered homepage structure, branded as hek3i, with documentation-style routes and safe placeholder fields."],
+          ["Next", "Add verified resource links, dates checked, and screenshots for any page that points to software."]
+        ]
+      },
+      "/community": {
+        title: "Community",
+        lead: "A placeholder page for Discord, support, and contribution links.",
+        sections: [
+          ["Discord", "Add your hek3i invite link here when the community is ready."],
+          ["Contributing", "Use issues, pull requests, or a simple form to suggest new safe resources."],
+          ["Moderation", "Keep requests focused on legal resources, project help, and troubleshooting."]
+        ]
+      }
+    };
+
+    const featureRoutes = ["/windows", "/mac", "/extensions", "/beginnersguide", "/genuine-service", "/websites"];
+    const home = document.getElementById("home");
+    const docs = document.getElementById("docs");
+    const doc = document.getElementById("doc");
+    const sidebar = document.getElementById("sidebar");
+    const features = document.getElementById("features");
+    const search = document.getElementById("search");
+
+    function allItems() {
+      return groups.flatMap(group => group.items.map(item => ({ group: group.title, route: item[0], title: item[1], desc: item[2] })));
+    }
+
+    function renderFeatures() {
+      features.innerHTML = featureRoutes.map(route => {
+        const item = allItems().find(entry => entry.route === route);
+        return `<a class="feature" href="#${item.route}"><h2>${item.title}</h2><p>${item.desc}</p></a>`;
+      }).join("");
+    }
+
+    function renderSidebar(filter = "") {
+      const query = filter.trim().toLowerCase();
+      sidebar.innerHTML = groups.map(group => {
+        const links = group.items
+          .filter(item => !query || `${item[1]} ${item[2]} ${group.title}`.toLowerCase().includes(query))
+          .map(item => `<a class="side-link" href="#${item[0]}" data-route="${item[0]}">${item[1]}</a>`)
+          .join("");
+        if (!links) return "";
+        return `<div class="side-group"><p class="side-title">${group.title}</p>${links}</div>`;
+      }).join("") || `<div class="empty-state">No pages matched that search.</div>`;
+    }
+
+    function renderDoc(route) {
+      const page = pages[route] || pages["/faq"];
+      document.title = `${page.title} - hek3i`;
+      doc.innerHTML = `
+        <h1>${page.title}</h1>
+        <p class="lead">${page.lead}</p>
+        ${page.notice ? `<div class="notice">${page.notice}</div>` : ""}
+        ${page.sections.map(section => `<h2>${section[0]}</h2><p>${section[1]}</p>`).join("")}
+      `;
+      document.querySelectorAll(".side-link").forEach(link => link.classList.toggle("active", link.dataset.route === route));
+      document.querySelectorAll("[data-nav]").forEach(link => link.classList.toggle("active", link.dataset.nav === route || (route === "/" && link.dataset.nav === "/")));
+    }
+
+    function route() {
+      const path = location.hash.replace(/^#/, "") || "/";
+      renderSidebar(search.value);
+      if (path === "/") {
+        document.title = "Home - hek3i";
+        home.classList.remove("hidden");
+        docs.classList.add("hidden");
+        document.querySelectorAll("[data-nav]").forEach(link => link.classList.toggle("active", link.dataset.nav === "/"));
+        return;
+      }
+      home.classList.add("hidden");
+      docs.classList.remove("hidden");
+      renderDoc(path);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    search.addEventListener("input", () => {
+      renderSidebar(search.value);
+      const path = location.hash.replace(/^#/, "") || "/";
+      if (path !== "/") renderDoc(path);
+    });
+
+    window.addEventListener("hashchange", route);
+    renderFeatures();
+    route();
+  </script>
+</body>
+</html>
