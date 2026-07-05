@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guides & Documentation - vanta</title>
+  <meta name="description" content="Technical setup guides, configuration steps, and troubleshoot documentation for video editors.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="vanta.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="topbar">
+    <nav class="shell nav" aria-label="Primary navigation">
+      <a class="brand" href="index.html">
+        <svg class="brand-logo" viewBox="0 0 1000 1000" fill="none">
+          <path d="M 275,256 L 545,750 L 512,608 L 385,325 L 500,328 Z" stroke="currentColor" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M 525,642 L 735,230 L 560,395 Z" stroke="currentColor" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>vanta</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="windows.html">Windows</a>
+        <a href="macos.html">macOS</a>
+        <a href="extensions.html">Extensions</a>
+        <a href="resources.html">Assets</a>
+        <a href="guides.html" class="active">Guides</a>
+        <a href="tutorials.html">Tutorials</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="nav-right-actions">
+        <button class="search-trigger-btn" aria-label="Open search">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="2.2"></circle>
+            <path d="M13 13l4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+          </svg>
+          <span>Search</span>
+          <kbd style="opacity: 0.5; font-size: 10px;">Ctrl K</kbd>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Split Screen Doc Container -->
+  <div class="shell doc-container-three-col">
+    <!-- Left Navigation Sidebar -->
+    <aside class="doc-sidebar">
+      <div class="doc-sidebar-group">
+        <span class="doc-sidebar-label">Core Manuals</span>
+        <div class="doc-sidebar-links" id="sidebar-core">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+      <div class="doc-sidebar-group">
+        <span class="doc-sidebar-label">Windows Instructions</span>
+        <div class="doc-sidebar-links" id="sidebar-win">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+      <div class="doc-sidebar-group">
+        <span class="doc-sidebar-label">macOS Instructions</span>
+        <div class="doc-sidebar-links" id="sidebar-mac">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+      <div class="doc-sidebar-group">
+        <span class="doc-sidebar-label">Creative Workflows</span>
+        <div class="doc-sidebar-links" id="sidebar-workflow">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- Center Content Reading Area -->
+    <main class="doc-content" id="active-guide-content">
+      <div style="padding: 40px; text-align: center; color: var(--quiet);">Loading guide content...</div>
+    </main>
+
+    <!-- Right Outline Navigation (Table of Contents) -->
+    <aside class="doc-outline">
+      <span class="doc-outline-title">On this page</span>
+      <div class="doc-outline-links" id="active-guide-toc">
+        <!-- Rendered dynamically -->
+      </div>
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="shell footer-inner">
+      <div class="footer-left">
+        <svg viewBox="0 0 1000 1000" fill="none" style="width: 24px; height: 24px;">
+          <path d="M 275,256 L 545,750 L 512,608 L 385,325 L 500,328 Z" stroke="currentColor" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M 525,642 L 735,230 L 560,395 Z" stroke="currentColor" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>vanta - made with ❤️ by <a href="https://hek3i.cc/">hek3i</a></span>
+      </div>
+      <div class="footer-right">
+        <a href="about.html">About</a>
+        <a href="status.html">Status</a>
+        <a href="credits.html">Credits</a>
+        <a href="https://dcd.gg/vantaaa" target="_blank" rel="noopener">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/keyflame_db.js"></script>
+  <script src="vanta.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Guide list groups categorizer
+      const groups = {
+        core: ["beginners-guide", "guides_plugin-starter-guide", "guides_preset-organization", "guides_render-settings"],
+        win: ["extract-win", "install-win", "unlicensed-win", "guides_genp-adobe-activation", "guides_plugin-install-locations"],
+        mac: ["extract-mac", "install-mac", "unlicensed-mac", "guides_macked-adobe-activation", "guides_rosetta-m1-guide", "guides_gatekeeper-quarantine-fixes"],
+        workflow: ["guides_maxon-red-giant-fixes", "guides_maxon-serial-filler-method", "guides_sourcing-anime-footage", "guides_changing-after-effects-version", "guides_after-effects-installation-paths", "guides_topaz-export-workflow", "guides_missing-effects-fix"]
+      };
+
+      // Load sidebars
+      function buildSidebars() {
+        if (!window.keyflameDb || !window.keyflameDb.guides) return;
+        const guides = window.keyflameDb.guides;
+        const guideMap = {};
+        guides.forEach(g => { guideMap[g.slug] = g; });
+
+        // Helper to render link
+        const renderLink = (slug) => {
+          const g = guideMap[slug];
+          if (!g) return '';
+          return `<a href="?guide=${slug}" class="doc-sidebar-link" data-slug="${slug}">${g.title}</a>`;
+        };
+
+        document.getElementById("sidebar-core").innerHTML = groups.core.map(renderLink).join("");
+        document.getElementById("sidebar-win").innerHTML = groups.win.map(renderLink).join("");
+        document.getElementById("sidebar-mac").innerHTML = groups.mac.map(renderLink).join("");
+        document.getElementById("sidebar-workflow").innerHTML = groups.workflow.map(renderLink).join("");
+      }
+
+      // Render Active Guide Content
+      function renderActiveGuide() {
+        if (!window.keyflameDb || !window.keyflameDb.guides) return;
+        const guides = window.keyflameDb.guides;
+
+        // Get slug from query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        let slug = urlParams.get("guide");
+        
+        // Default to beginners-guide if empty or invalid
+        if (!slug || !guides.some(g => g.slug === slug)) {
+          slug = "beginners-guide";
+        }
+
+        const guide = guides.find(g => g.slug === slug);
+        if (!guide) return;
+
+        // Highlight sidebar links
+        document.querySelectorAll(".doc-sidebar-link").forEach(link => {
+          if (link.getAttribute("data-slug") === slug) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        // Set content html
+        const contentContainer = document.getElementById("active-guide-content");
+        
+        // Clean titles and formats
+        let badgeType = "ae";
+        if (slug.includes("win")) badgeType = "windows";
+        if (slug.includes("mac")) badgeType = "macos";
+
+        const sectionsHtml = guide.sections.map(sec => `
+          <div id="${sec.id}" class="doc-section">
+            ${sec.kicker ? `<span class="section-kicker">${sec.kicker}</span>` : ''}
+            <h2>${sec.heading}</h2>
+            <div>${sec.htmlContent}</div>
+          </div>
+        `).join("");
+
+        contentContainer.innerHTML = `
+          <header class="page-header">
+            <h1>${guide.title}</h1>
+            <p>${guide.description}</p>
+            <span class="badge-tag ${badgeType}">${guide.title.includes("Mac") || guide.title.includes("macOS") ? 'macOS Guide' : (guide.title.includes("Windows") ? 'Windows Guide' : 'After Effects')}</span>
+          </header>
+          ${sectionsHtml}
+        `;
+
+        // Load right outline TOC
+        const tocContainer = document.getElementById("active-guide-toc");
+        tocContainer.innerHTML = guide.sections.map(sec => `
+          <a href="#${sec.id}" class="doc-outline-link">${sec.heading}</a>
+        `).join("");
+
+        // Highlight right TOC link behavior
+        document.querySelectorAll(".doc-outline-link").forEach(link => {
+          link.addEventListener("click", () => {
+            document.querySelectorAll(".doc-outline-link").forEach(l => l.style.color = "");
+            link.style.color = "var(--mint)";
+          });
+        });
+
+        // Hook code block copy button again for dynamic content
+        initCodeCopy();
+
+        // Scroll to hash section if present in URL
+        if (window.location.hash) {
+          const target = document.querySelector(window.location.hash);
+          if (target) {
+            setTimeout(() => {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+          }
+        }
+      }
+
+      // Initialize
+      buildSidebars();
+      renderActiveGuide();
+
+      // Listen to navigation popstate (if parameters change)
+      window.addEventListener("popstate", renderActiveGuide);
+    });
+  </script>
+</body>
+</html>

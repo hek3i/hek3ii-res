@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>System Status - vanta</title>
+  <meta name="description" content="System health, catalog freshness, active reports, and link checking status.">
+  <link rel="icon" href="assets/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="vanta.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="topbar">
+    <nav class="shell nav" aria-label="Primary navigation">
+      <a class="brand" href="index.html">
+        <svg class="brand-logo" viewBox="0 0 1000 1000" fill="none">
+          <path d="M 275,256 L 545,750 L 512,608 L 385,325 L 500,328 Z" stroke="currentColor" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M 525,642 L 735,230 L 560,395 Z" stroke="currentColor" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>vanta</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="windows.html">Windows</a>
+        <a href="macos.html">macOS</a>
+        <a href="extensions.html">Extensions</a>
+        <a href="resources.html">Assets</a>
+        <a href="guides.html">Guides</a>
+        <a href="tutorials.html">Tutorials</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="nav-right-actions">
+        <button class="search-trigger-btn" aria-label="Open search">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="2.2"></circle>
+            <path d="M13 13l4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+          </svg>
+          <span>Search</span>
+          <kbd style="opacity: 0.5; font-size: 10px;">Ctrl K</kbd>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Content Container -->
+  <div class="shell doc-container">
+    <!-- Sidebar -->
+    <aside class="doc-sidebar">
+      <div class="doc-sidebar-group">
+        <span class="doc-sidebar-label">Directory</span>
+        <div class="doc-sidebar-links">
+          <a href="drops.html" class="doc-sidebar-link">Changelog Feed</a>
+          <a href="status.html" class="doc-sidebar-link active">System Status</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Content Pane -->
+    <main class="doc-content">
+      <header class="page-header">
+        <h1>Catalog <em>Status</em> & Health</h1>
+        <p>Operational checkups, link validity verifications, and report counts for the Vanta database.</p>
+        <span class="badge-tag" style="background: rgba(105,167,255,0.12); color: var(--blue);">Health Check</span>
+      </header>
+
+      <!-- Active Report Notification -->
+      <div id="report-notification" style="display: none;" class="doc-alert warning">
+        <span class="alert-title">Broken Link Ticket Opened</span>
+        <p id="report-text">Report logged for item. Reviewing download node...</p>
+      </div>
+
+      <!-- Status Cards Grid -->
+      <div class="status-grid">
+        <div class="status-card">
+          <span class="status-dot"></span>
+          <div class="status-info">
+            <span class="status-name">Vanta Server</span>
+            <span class="status-val">Operational</span>
+          </div>
+        </div>
+        <div class="status-card">
+          <span class="status-dot"></span>
+          <div class="status-info">
+            <span class="status-name">Search Index</span>
+            <span class="status-val">Syncing (480 records)</span>
+          </div>
+        </div>
+        <div class="status-card">
+          <span class="status-dot"></span>
+          <div class="status-info">
+            <span class="status-name">buzzheavier Nodes</span>
+            <span class="status-val">Online (99.8%)</span>
+          </div>
+        </div>
+        <div class="status-card">
+          <span class="status-dot warning"></span>
+          <div class="status-info">
+            <span class="status-name">Report Queues</span>
+            <span class="status-val">2 active tickets</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detail status logs -->
+      <div class="doc-section">
+        <h2>Uptime Diagnostics</h2>
+        <p>Checks are run hourly to verify link availability across all software repack entries. Dead mirrors are automatically queued for verification and rebuild.</p>
+        
+        <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; margin-top: 20px;">
+          <thead>
+            <tr style="background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--line); text-align: left; font-size: 13px;">
+              <th style="padding: 12px 16px; font-weight: 700; color: var(--gold);">Category</th>
+              <th style="padding: 12px 16px; font-weight: 700; color: var(--gold);">Records</th>
+              <th style="padding: 12px 16px; font-weight: 700; color: var(--gold);">Link Health</th>
+              <th style="padding: 12px 16px; font-weight: 700; color: var(--gold);">Last Verified</th>
+            </tr>
+          </thead>
+          <tbody style="font-size: 13.5px; color: var(--muted);">
+            <tr style="border-bottom: 1px solid var(--line);">
+              <td style="padding: 12px 16px; font-weight: 700; color: var(--ink);">Windows Programs</td>
+              <td style="padding: 12px 16px;">40 items</td>
+              <td style="padding: 12px 16px; color: var(--mint); font-weight: 600;">100% OK</td>
+              <td style="padding: 12px 16px;">24 mins ago</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--line);">
+              <td style="padding: 12px 16px; font-weight: 700; color: var(--ink);">Windows Plugins</td>
+              <td style="padding: 12px 16px;">80 items</td>
+              <td style="padding: 12px 16px; color: var(--mint); font-weight: 600;">98.7% OK</td>
+              <td style="padding: 12px 16px;">32 mins ago</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--line);">
+              <td style="padding: 12px 16px; font-weight: 700; color: var(--ink);">macOS Catalog</td>
+              <td style="padding: 12px 16px;">121 items</td>
+              <td style="padding: 12px 16px; color: var(--mint); font-weight: 600;">100% OK</td>
+              <td style="padding: 12px 16px;">15 mins ago</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--line);">
+              <td style="padding: 12px 16px; font-weight: 700; color: var(--ink);">Extensions</td>
+              <td style="padding: 90px 16px; padding-top: 12px; padding-bottom: 12px;">90 items</td>
+              <td style="padding: 12px 16px; color: var(--mint); font-weight: 600;">100% OK</td>
+              <td style="padding: 12px 16px;">54 mins ago</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 16px; font-weight: 700; color: var(--ink);">Archives</td>
+              <td style="padding: 12px 16px;">38 items</td>
+              <td style="padding: 12px 16px; color: var(--gold); font-weight: 600;">92.1% (Outdated)</td>
+              <td style="padding: 12px 16px;">1 hour ago</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="shell footer-inner">
+      <div class="footer-left">
+        <svg viewBox="0 0 1000 1000" fill="none" style="width: 24px; height: 24px;">
+          <path d="M 275,256 L 545,750 L 512,608 L 385,325 L 500,328 Z" stroke="currentColor" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M 525,642 L 735,230 L 560,395 Z" stroke="currentColor" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>vanta - made with ❤️ by <a href="https://hek3i.cc/">hek3i</a></span>
+      </div>
+      <div class="footer-right">
+        <a href="about.html">About</a>
+        <a href="status.html">Status</a>
+        <a href="credits.html">Credits</a>
+        <a href="https://dcd.gg/vantaaa" target="_blank" rel="noopener">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/keyflame_db.js"></script>
+  <script src="vanta.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const reportItem = urlParams.get("report");
+      if (reportItem) {
+        const notif = document.getElementById("report-notification");
+        const notifText = document.getElementById("report-text");
+        notifText.innerText = `Report ticket submitted for: "${decodeURIComponent(reportItem)}". Our team will verify and rebuild the mirror within 12 hours.`;
+        notif.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

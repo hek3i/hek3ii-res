@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Extensions & Scripts - vanta</title>
+  <meta name="description" content="After Effects extensions, JSX scripts, panels, and Premiere presets.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="vanta.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="topbar">
+    <nav class="shell nav" aria-label="Primary navigation">
+      <a class="brand" href="index.html">
+        <svg class="brand-logo" viewBox="0 0 1000 1000" fill="none">
+          <path d="M 275,256 L 545,750 L 512,608 L 385,325 L 500,328 Z" stroke="currentColor" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M 525,642 L 735,230 L 560,395 Z" stroke="currentColor" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>vanta</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="windows.html">Windows</a>
+        <a href="macos.html">macOS</a>
+        <a href="extensions.html" class="active">Extensions</a>
+        <a href="resources.html">Assets</a>
+        <a href="guides.html">Guides</a>
+        <a href="tutorials.html">Tutorials</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="nav-right-actions">
+        <button class="search-trigger-btn" aria-label="Open search">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="2.2"></circle>
+            <path d="M13 13l4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+          </svg>
+          <span>Search</span>
+          <kbd style="opacity: 0.5; font-size: 10px;">Ctrl K</kbd>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Content Container -->
+  <div class="shell doc-container">
+    <!-- Sidebar -->
+    <aside class="doc-sidebar">
+      <div class="doc-sidebar-group">
+        <span class="doc-sidebar-label">Platform Directory</span>
+        <div class="doc-sidebar-links">
+          <a href="windows.html" class="doc-sidebar-link">Windows Catalog</a>
+          <a href="macos.html" class="doc-sidebar-link">macOS Catalog</a>
+          <a href="extensions.html" class="doc-sidebar-link active">Extensions & Scripts</a>
+          <a href="archives.html" class="doc-sidebar-link">Archives (Legacy)</a>
+        </div>
+      </div>
+      <div class="doc-sidebar-group">
+        <span class="doc-sidebar-label">Filter Category</span>
+        <div class="doc-sidebar-links" id="sidebar-filters">
+          <a href="#" class="doc-sidebar-link active" data-filter="all">All Packages</a>
+          <a href="#" class="doc-sidebar-link" data-filter="Extensions">Extensions (ZXP)</a>
+          <a href="#" class="doc-sidebar-link" data-filter="Scripts">After Effects Scripts</a>
+          <a href="#" class="doc-sidebar-link" data-filter="Premiere Scripts">Premiere Pro Scripts</a>
+        </div>
+      </div>
+      <div class="doc-sidebar-group">
+        <span class="doc-sidebar-label">Installation Guides</span>
+        <div class="doc-sidebar-links">
+          <a href="guides.html?guide=guides_after-effects-installation-paths" class="doc-sidebar-link">AE Install Paths</a>
+          <a href="guides.html?guide=guides_plugin-install-locations" class="doc-sidebar-link">Plugin Directories</a>
+          <a href="guides.html?guide=extensions" class="doc-sidebar-link">Extensions Info</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Content Pane -->
+    <main class="doc-content">
+      <header class="page-header">
+        <h1>Extensions & <em>Scripts</em> Catalog</h1>
+        <p>A library of host panels, ZXP packages, jsx workflow boosters, script bundles, and visual editors.</p>
+        <span class="badge-tag ae">Extensions & Scripts</span>
+      </header>
+
+      <!-- Search Controls -->
+      <div class="search-controls">
+        <div class="search-input-wrap">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="2.2"></circle>
+            <path d="M13 13l4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path>
+          </svg>
+          <input type="search" id="catalog-search" placeholder="Search scripting panels, ZXPs, presets..." autocomplete="off">
+        </div>
+      </div>
+
+      <!-- Catalog Container -->
+      <div id="catalog-container">
+        <!-- Rendered dynamically -->
+        <div style="padding: 40px; text-align: center; color: var(--quiet);">Loading database...</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="shell footer-inner">
+      <div class="footer-left">
+        <svg viewBox="0 0 1000 1000" fill="none" style="width: 24px; height: 24px;">
+          <path d="M 275,256 L 545,750 L 512,608 L 385,325 L 500,328 Z" stroke="currentColor" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M 525,642 L 735,230 L 560,395 Z" stroke="currentColor" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>vanta - made with ❤️ by <a href="https://hek3i.cc/">hek3i</a></span>
+      </div>
+      <div class="footer-right">
+        <a href="about.html">About</a>
+        <a href="status.html">Status</a>
+        <a href="credits.html">Credits</a>
+        <a href="https://dcd.gg/vantaaa" target="_blank" rel="noopener">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/keyflame_db.js"></script>
+  <script src="vanta.js"></script>
+  <script>
+    // Local Page Controller
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchInput = document.getElementById("catalog-search");
+      const filterLinks = document.querySelectorAll("#sidebar-filters [data-filter]");
+      let activeFilter = "all";
+      let activeQuery = "";
+
+      // Check URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryParam = urlParams.get("q");
+      if (queryParam) {
+        searchInput.value = queryParam;
+        activeQuery = queryParam.toLowerCase();
+      }
+
+      // Sidebar filter clicks
+      filterLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          filterLinks.forEach(fl => fl.classList.remove("active"));
+          link.classList.add("active");
+          activeFilter = link.getAttribute("data-filter");
+          renderExtensionsCatalog();
+        });
+      });
+
+      // Search inputs
+      searchInput.addEventListener("input", (e) => {
+        activeQuery = e.target.value.trim().toLowerCase();
+        renderExtensionsCatalog();
+      });
+
+      // Render Function
+      function renderExtensionsCatalog() {
+        const container = document.getElementById("catalog-container");
+        if (!window.keyflameDb || !window.keyflameDb.extensions) {
+          container.innerHTML = `<div style="padding: 40px; text-align: center; color: var(--hot);">Database failed to load.</div>`;
+          return;
+        }
+
+        const items = window.keyflameDb.extensions;
+        
+        // Filter items
+        const filteredItems = items.filter(item => {
+          const matchesQuery = item.name.toLowerCase().includes(activeQuery) || 
+                               item.category.toLowerCase().includes(activeQuery);
+          const matchesFilter = activeFilter === "all" || item.category === activeFilter;
+          return matchesQuery && matchesFilter;
+        });
+
+        if (filteredItems.length === 0) {
+          container.innerHTML = `<div style="padding: 40px; text-align: center; color: var(--quiet);">No matching records found.</div>`;
+          return;
+        }
+
+        // Group by category
+        const groups = {};
+        filteredItems.forEach(item => {
+          if (!groups[item.category]) groups[item.category] = [];
+          groups[item.category].push(item);
+        });
+
+        // Generate HTML
+        let html = "";
+        Object.keys(groups).sort().forEach(catName => {
+          const catItems = groups[catName];
+          html += `
+            <div class="catalog-section-group">
+              <div class="catalog-group-header">
+                <span class="catalog-group-title">${catName}</span>
+                <span class="catalog-group-count">${catItems.length} records</span>
+              </div>
+              <div class="catalog-list">
+                ${catItems.map(item => `
+                  <div class="catalog-item">
+                    <div class="catalog-item-info">
+                      <span class="catalog-item-name">${item.name}</span>
+                      <div class="catalog-item-meta">
+                        <span>Host: <b class="catalog-item-host">${item.host}</b></span>
+                        <span>•</span>
+                        <span>Platform: After Effects & Premiere Pro</span>
+                        <span>•</span>
+                        <span>Workflow optimizer</span>
+                      </div>
+                    </div>
+                    <div class="catalog-item-actions">
+                      <button class="report-btn" title="Report broken link" onclick="window.location.href='status.html?report=${encodeURIComponent(item.name)}'">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" stroke-linecap="round" stroke-linejoin="round"/>
+                          <line x1="4" y1="22" x2="4" y2="15" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <a href="${item.downloadUrl}" class="dl-btn" target="_blank" rel="noopener">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-linecap="round" stroke-linejoin="round"/>
+                          <polyline points="7 10 12 15 17 10" stroke-linecap="round" stroke-linejoin="round"/>
+                          <line x1="12" y1="15" x2="12" y2="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Download</span>
+                      </a>
+                    </div>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+      }
+
+      // Initial Render
+      renderExtensionsCatalog();
+    });
+  </script>
+</body>
+</html>
